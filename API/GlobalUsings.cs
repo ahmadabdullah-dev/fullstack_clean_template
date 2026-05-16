@@ -1,0 +1,4 @@
+﻿global using Infrastructure;
+global using Application;
+global using Persistence;
+global using API;
