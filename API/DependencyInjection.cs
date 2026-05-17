@@ -21,7 +21,7 @@ public static class DependencyInjection
             });
         });
 
-        services.AddIdentityApiEndpoints<User>(opt =>
+        services.AddIdentityApiEndpoints<AppUser>(opt =>
         {
             opt.User.RequireUniqueEmail = true;
            // opt.SignIn.RequireConfirmedEmail = true;
@@ -42,7 +42,7 @@ public static class DependencyInjection
         try
         {
             var context = services.GetRequiredService<AppDbContext>();
-            var userManager = services.GetRequiredService<UserManager<User>>();
+            var userManager = services.GetRequiredService<UserManager<AppUser>>();
             await context.Database.MigrateAsync();
             await DbInitializer.SeedData(context, userManager);
         }

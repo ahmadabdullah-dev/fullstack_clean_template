@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Persistence;
 
 public class AppDbContext(DbContextOptions options) 
-    : IdentityDbContext<User> (options)
+    : IdentityDbContext<AppUser> (options)
 {
     
 }

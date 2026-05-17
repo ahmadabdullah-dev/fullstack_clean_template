@@ -4,9 +4,9 @@ namespace Persistence;
 
 public class DbInitializer
 {
-    public static async Task SeedData(AppDbContext context,UserManager<User> userManager)
+    public static async Task SeedData(AppDbContext context,UserManager<AppUser> userManager)
     {
-        var users = new List<User>()
+        var users = new List<AppUser>()
         {
             new() {UserName = "cr7", Email= "cristiano@ronaldo.com", Country ="Portugal"},
             new() {UserName = "lm10", Email = "lionel@messi.com", Country ="Argentina"},
