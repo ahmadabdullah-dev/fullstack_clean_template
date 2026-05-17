@@ -6,3 +6,8 @@ public record RegisterDto(
     string Password,
     string Country
 );
+
+public record LoginDto(
+    string Email, 
+    string Password
+);
