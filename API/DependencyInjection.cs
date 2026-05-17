@@ -30,9 +30,6 @@ public static class DependencyInjection
         .AddEntityFrameworkStores<AppDbContext>();
 
 
-        services.AddMediatR(cfg =>
-        cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly));
-      
         return services;
     }
     public static async Task MigrateAndSeedAsync(this WebApplication app)

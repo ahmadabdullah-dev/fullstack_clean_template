@@ -11,12 +11,8 @@ namespace API.Controllers;
 public class BaseApiController : ControllerBase
 {
     private IMediator? _mediator;
-    private UserManager<AppUserEntity>? _userManager;
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>()
         ?? throw new InvalidOperationException("IMediator service is not available.");
-    protected UserManager<AppUserEntity> UserManager => _userManager ??=
-    HttpContext.RequestServices.GetService<UserManager<AppUserEntity>>()
-    ?? throw new InvalidOperationException("UserManager service is not available.");
 
     protected ActionResult HandleResult<T>(Result<T> result)
     {
