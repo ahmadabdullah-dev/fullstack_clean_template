@@ -11,7 +11,7 @@ public class UserAccessor(IHttpContextAccessor httpContextAccessor, AppDbContext
                ?? throw new Exception("No user found");
     }
 
-    public async Task<AppUser> GetUserAsync()
+    public async Task<AppUserEntity> GetUserAsync()
     {
         var userId = GetUserId();
         if (string.IsNullOrEmpty(userId))

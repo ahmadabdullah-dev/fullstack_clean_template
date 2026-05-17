@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Application.Features.Auth.Commands.Register;
 
-public class RegisterHandler(UserManager<AppUser> userManager) 
-    : IRequestHandler<RegisterCommand, Result<Unit>>
+public class RegisterUserHandler(UserManager<AppUserEntity> userManager) 
+    : IRequestHandler<RegisterUserCommand, Result<Unit>>
 {
-    public async Task<Result<Unit>> Handle(RegisterCommand request, CancellationToken ct)
+    public async Task<Result<Unit>> Handle(RegisterUserCommand request, CancellationToken ct)
     {
-        var user = new AppUser
+        var user = new AppUserEntity
         {
             UserName = request.UserName,
             Email = request.Email,

@@ -21,7 +21,7 @@ public static class DependencyInjection
             });
         });
 
-        services.AddIdentityApiEndpoints<AppUser>(opt =>
+        services.AddIdentityApiEndpoints<AppUserEntity>(opt =>
         {
             opt.User.RequireUniqueEmail = true;
            // opt.SignIn.RequireConfirmedEmail = true;
@@ -31,7 +31,7 @@ public static class DependencyInjection
 
 
         services.AddMediatR(cfg =>
-        cfg.RegisterServicesFromAssembly(typeof(RegisterCommand).Assembly));
+        cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly));
       
         return services;
     }
@@ -42,7 +42,7 @@ public static class DependencyInjection
         try
         {
             var context = services.GetRequiredService<AppDbContext>();
-            var userManager = services.GetRequiredService<UserManager<AppUser>>();
+            var userManager = services.GetRequiredService<UserManager<AppUserEntity>>();
             await context.Database.MigrateAsync();
             await DbInitializer.SeedData(context, userManager);
         }

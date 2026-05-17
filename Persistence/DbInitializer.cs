@@ -5,9 +5,9 @@ namespace Persistence;
 
 public class DbInitializer
 {
-    public static async Task SeedData(AppDbContext context,UserManager<AppUser> userManager)
+    public static async Task SeedData(AppDbContext context,UserManager<AppUserEntity> userManager)
     {
-        var users = new List<AppUser>()
+        var users = new List<AppUserEntity>()
         {
             new() {UserName = "cr7", Email= "cristiano@ronaldo.com", Country ="Portugal"},
             new() {UserName = "lm10", Email = "lionel@messi.com", Country ="Argentina"},
@@ -29,7 +29,7 @@ public class DbInitializer
         if (context.Todos.Any()) 
             return;
 
-        var todos = new List<Todo>()
+        var todos = new List<TodoEntity>()
         {
            new() {
                 Title = "Go to university",

@@ -8,10 +8,10 @@ namespace API.Controllers;
 
 public class AuthController : BaseApiController
 {
-    private readonly SignInManager<AppUser> _signInManager;
-    private readonly UserManager<AppUser> _userManager;
+    private readonly SignInManager<AppUserEntity> _signInManager;
+    private readonly UserManager<AppUserEntity> _userManager;
 
-    public AuthController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
+    public AuthController(SignInManager<AppUserEntity> signInManager, UserManager<AppUserEntity> userManager)
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -21,7 +21,7 @@ public class AuthController : BaseApiController
     [HttpPost("register")]
     public async Task<ActionResult> Register([FromBody] RegisterDto dto)
     {
-        var command = new RegisterCommand(dto.UserName,dto.Email,dto.Password,dto.Country);
+        var command = new RegisterUserCommand(dto.UserName,dto.Email,dto.Password,dto.Country);
         return HandleResult(await Mediator.Send(command));
     }
 

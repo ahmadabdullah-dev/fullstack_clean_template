@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Persistence;
 
 public class AppDbContext(DbContextOptions options) 
-    : IdentityDbContext<AppUser> (options)
+    : IdentityDbContext<AppUserEntity> (options)
 {
-    public DbSet<Todo> Todos { get; set; }
+    public DbSet<TodoEntity> Todos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -3,5 +3,5 @@
 public interface IUserAccessor
 {
     string GetUserId();
-    Task<AppUser> GetUserAsync();
+    Task<AppUserEntity> GetUserAsync();
 }

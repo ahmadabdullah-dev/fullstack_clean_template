@@ -2,8 +2,8 @@
 
 namespace Domain.Entities;
 
-public class AppUser : IdentityUser
+public class AppUserEntity : IdentityUser
 {
     public string? Country { get; set; }
-    IEnumerable<Todo>? Todos { get; set; }
+    IEnumerable<TodoEntity>? Todos { get; set; }
 }
