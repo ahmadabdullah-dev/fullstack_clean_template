@@ -1,6 +1,6 @@
 # Fullstack Clean Template
 
-A full-stack template built with Clean Architecture principles, designed as a reusable foundation for other projects.
+A full-stack template built with Clean Architecture principles, designed as a reusable foundation for other projects with Cookies based authentication.
 
 ## Stack
 
