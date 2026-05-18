@@ -11,15 +11,16 @@ A full-stack template built with Clean Architecture principles, designed as a re
 
 ## Structure
 
-Domain
-Application
-Infrastructure
-API
+- Domain
+- Application
+- Infrastructure
+- API
 
 ## Features
 - Auth — register and login via ASP.NET Identity+ full crud for user 
 - Todo — full CRUD example to demonstrate the CQRS workflow end to end
-
+- Result<T> pattern — returns function results as Success(T value) or Failure(string error, int code)
+- PagedList<T> and pagination patterns — handle incoming queries with page number and page size 
   
 ## Database Migrations
 
