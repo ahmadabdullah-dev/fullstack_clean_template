@@ -1,5 +1,4 @@
-﻿using Application.Features.Auth.Commands.Register;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

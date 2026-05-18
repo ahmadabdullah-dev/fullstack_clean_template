@@ -8,8 +8,7 @@ public class CreateTodo
         public required CreateTodoDto Dto { get; set; }
     }
 
-    public class Handler(AppDbContext context, IUserAccessor userAccessor)
-        : IRequestHandler<Command, Result<string>>
+    public class Handler(AppDbContext context, IUserAccessor userAccessor) : IRequestHandler<Command, Result<string>>
     {
         public async Task<Result<string>> Handle(Command request, CancellationToken ct)
         {
