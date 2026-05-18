@@ -22,6 +22,68 @@ A full-stack template built with Clean Architecture principles, designed as a re
 - Result<T> pattern — returns function results as Success(T value) or Failure(string error, int code)
 - PagedList<T> and pagination patterns — handle incoming queries with page number and page size 
   
+  
+# API EndPoints
+## Auth
+
+### Register
+`POST /api/Auth/register`
+
+#### Request Body
+```json
+{
+  "userName": "string",
+  "email": "string",
+  "password": "string",
+  "country": "string"
+}
+```
+
+---
+
+### Login
+`POST /api/Auth/login`
+
+#### Request Body
+```json
+{
+  "email": "string",
+  "password": "string"
+}
+```
+
+---
+
+### Logout
+`POST /api/Auth/logout`
+
+---
+
+## Todo
+
+### Create Todo
+`POST /api/Todo`
+
+#### Request Body
+```json
+{
+  "title": "string"
+}
+```
+
+---
+
+### Get Todos
+`GET /api/Todo`
+
+#### Query Params
+```txt
+StartDate?: datetime
+Page?: number
+PageSize?: number
+```
+---
+
 ## Database Migrations
 
 Navigate to the solution root first:
