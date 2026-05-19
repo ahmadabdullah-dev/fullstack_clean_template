@@ -1,7 +1,7 @@
 ﻿using Application.Features.Auth.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-
+using FluentValidation;
 namespace Application.Features.Auth.Commands;
 
 public class CreateUser
@@ -11,10 +11,16 @@ public class CreateUser
         public required CreateUserDto Dto { get; set; }
     }
 
-    public class CreateUserHandler(UserManager<AppUserEntity> userManager) : IRequestHandler<Command, Result<string>>
+    public class CreateUserHandler(UserManager<AppUserEntity> userManager, IValidator<Command> validator)
+        : IRequestHandler<Command, Result<string>>
     {
         public async Task<Result<string>> Handle(Command request, CancellationToken ct)
         {
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (!validationResult.IsValid)
+                return Result<string>.Failure(string.Join(",",validationResult.Errors),400);
+
             var user = new AppUserEntity
             {
                 UserName = request.Dto.UserName.ToLowerInvariant().Trim(), // prefred Invariant to ToLower  "I" => "ı" bug 
