@@ -2,7 +2,7 @@
 
 public class PaginationParams
 {
-    private const int MaxPageSize = 200; // max items can come at a page
+    private const int MaxPageSize = 50; // max items can come at a page
     private int _pageSize = 10; // Default page size
     public int Page { get; set; } = 1;
 
