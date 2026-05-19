@@ -8,7 +8,8 @@ A full-stack template built with Clean Architecture principles, designed as a re
 - **ORM** — Entity Framework Core 10
 - **Auth** — ASP.NET Identity
 - **CQRS** — MediatR
--**Validator** — FluentValidation
+- **Validator** — FluentValidation
+
 ## Structure
 
 - Domain
