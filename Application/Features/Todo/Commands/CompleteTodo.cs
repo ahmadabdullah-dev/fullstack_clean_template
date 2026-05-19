@@ -7,7 +7,6 @@ public class CompleteTodo
     public record Command : IRequest<Result<string>>
     {
         public required string Id { get; init; }
-        public required bool Complete { get; init;}
     }
     public class Handler(AppDbContext context, IUserAccessor userAccessor) : IRequestHandler<Command, Result<string>>
     {
@@ -22,7 +21,7 @@ public class CompleteTodo
             if (todo.AppUserId != user.Id.ToString())
                 return Result<string>.Failure("No ability to update this todo", 403);
 
-                todo.IsCompleted = request.Complete;
+                todo.IsCompleted = !todo.IsCompleted;
 
             var result = await context.SaveChangesAsync(ct) > 0;
 

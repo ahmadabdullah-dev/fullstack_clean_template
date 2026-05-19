@@ -1,9 +1,11 @@
 ﻿using Application.Core;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class BaseApiController : ControllerBase
