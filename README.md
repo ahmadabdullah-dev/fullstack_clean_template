@@ -8,6 +8,7 @@ A full-stack template built with Clean Architecture principles, designed as a re
 - **ORM** — Entity Framework Core 10
 - **Auth** — ASP.NET Identity
 - **CQRS** — MediatR
+- **Validator** — FluentValidation
 
 ## Structure
 
@@ -21,7 +22,6 @@ A full-stack template built with Clean Architecture principles, designed as a re
 - Todo — full CRUD example to demonstrate the CQRS workflow end to end
 - Result<T> pattern — returns function results as Success(T value) or Failure(string error, int code)
 - PagedList<T> and pagination patterns — handle incoming queries with page number and page size 
-  
   
 # API EndPoints
 ## Auth
