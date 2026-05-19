@@ -1,5 +1,4 @@
-﻿using API.DTOs;
-using Application.Features.Auth.Commands;
+﻿using Application.Features.Auth.Commands;
 using Application.Features.Auth.DTOs;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -10,12 +9,10 @@ namespace API.Controllers;
 public class AuthController : BaseApiController
 {
     private readonly SignInManager<AppUserEntity> _signInManager;
-    private readonly UserManager<AppUserEntity> _userManager;
 
     public AuthController(SignInManager<AppUserEntity> signInManager, UserManager<AppUserEntity> userManager)
     {
         _signInManager = signInManager;
-        _userManager = userManager;
     }
 
     [AllowAnonymous]
@@ -27,18 +24,17 @@ public class AuthController : BaseApiController
 
     [AllowAnonymous]
     [HttpPost("login")]
-    public async Task<ActionResult> Login([FromBody] LoginDto dto)
+    public async Task<ActionResult> Login([FromBody] LoginUserDto dto)
     {
-        var user = await _userManager.FindByEmailAsync(dto.Email);
-        if (user == null) return Unauthorized("Invalid email or password");
+        var result = await Mediator.Send(new LoginUser.Command { Dto = dto });
 
-        var result = await _userManager.CheckPasswordAsync(user, dto.Password);
-        if (!result) return Unauthorized("Invalid email or password");
+        if (!result.IsSuccess)
+            return Unauthorized(result.Error);
 
-        await _signInManager.SignInAsync(user, isPersistent: true);
+        await _signInManager.SignInAsync(result.Value!, isPersistent: dto.RememberMe); // isPersistent: determines if the browser will save login cookies 
+
         return NoContent();
     }
-
     [Authorize]
     [HttpPost("logout")]
     public async Task<ActionResult> Logout()
