@@ -1,4 +1,5 @@
 ﻿using Application.Features.Auth.DTOs;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
@@ -11,17 +12,16 @@ public class LoginUser
         public required LoginUserDto Dto { get; set; }
     }
 
-    public class Handler : IRequestHandler<Command, Result<AppUserEntity>>
+    public class Handler(UserManager<AppUserEntity> _userManager, IValidator<Command> validator) 
+        : IRequestHandler<Command, Result<AppUserEntity>>
     {
-        private readonly UserManager<AppUserEntity> _userManager;
-
-        public Handler(UserManager<AppUserEntity> userManager)
-        {
-            _userManager = userManager;
-        }
-
         public async Task<Result<AppUserEntity>> Handle(Command request, CancellationToken ct)
         {
+            var validationResult = await validator.ValidateAsync(request, ct);
+
+            if (!validationResult.IsValid)
+                return Result<AppUserEntity>.Failure(string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage)), 400);
+
             var user = await _userManager.FindByEmailAsync(request.Dto.Email.ToLowerInvariant().Trim());
 
             if (user == null)
