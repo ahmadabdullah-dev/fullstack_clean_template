@@ -15,8 +15,8 @@ public class TodoController : BaseApiController
         return HandleResult(await Mediator.Send(new CreateTodo.Command { Dto = dto}));
     }
     [HttpGet]
-    public async Task<IActionResult> GetTodoList([FromQuery] TodoParams param)
+    public async Task<IActionResult> GetTodoList([FromQuery] TodoParams p)
     {
-        return HandleResult(await Mediator.Send(new ReadTodoList.Query { Params = param }));
+        return HandleResult(await Mediator.Send(new ReadTodoList.Query { Params = p }));
     }
 }

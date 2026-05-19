@@ -17,8 +17,8 @@ public class CreateUser
         {
             var user = new AppUserEntity
             {
-                UserName = request.Dto.UserName.ToLowerInvariant(),// prefred Invariant to ToLower (Turkish "I" → "ı" bug) 
-                Email = request.Dto.Email.ToLowerInvariant(),
+                UserName = request.Dto.UserName.ToLowerInvariant().Trim(), // prefred Invariant to ToLower  "I" => "ı" bug 
+                Email = request.Dto.Email.ToLowerInvariant().Trim(),
                 Country = request.Dto.Country.ToLowerInvariant(),
             };
 

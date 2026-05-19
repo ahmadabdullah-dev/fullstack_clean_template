@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
 
@@ -10,8 +9,6 @@ public static class DependencyInjection
 
         services.AddMediatR(cfg =>
         cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
-
-       
 
         return services;
     }

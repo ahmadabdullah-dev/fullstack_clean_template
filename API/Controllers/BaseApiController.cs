@@ -1,8 +1,6 @@
 ﻿using Application.Core;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Domain.Entities;
 
 namespace API.Controllers;
 
