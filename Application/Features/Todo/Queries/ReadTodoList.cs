@@ -5,9 +5,9 @@ namespace Application.Features.Todo.Queries;
 
 public class ReadTodoList
 {
-    public class Query : IRequest<Result<PagedList<ReadTodoDto>>>
+    public record Query : IRequest<Result<PagedList<ReadTodoDto>>>
     {
-        public required TodoParams Params { get; set; }
+        public required TodoParams Params { get; init; }
     }
 
     public class Handler(AppDbContext context, IUserAccessor userAccessor)
@@ -21,7 +21,7 @@ public class ReadTodoList
                 .Where(x => x.AppUserId == currentUserId)
                 .Where( x => x.CreatedDate >= request.Params.StartDate)
                 .OrderBy(x => x.CreatedDate)
-                .Select(x => new ReadTodoDto(x.Id, x.Title, x.IsCompleted, x.CreatedDate));
+                .Select(x => new ReadTodoDto(x.Id,x.AppUserId!, x.Title, x.IsCompleted, x.CreatedDate));
 
             var result = await PagedList<ReadTodoDto>.CreateAsync(query, request.Params.Page, request.Params.PageSize, ct);
 

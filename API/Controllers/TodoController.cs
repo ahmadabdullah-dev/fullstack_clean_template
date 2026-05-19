@@ -20,6 +20,12 @@ public class TodoController : BaseApiController
         return HandleResult(await Mediator.Send(new ReadTodoList.Query { Params = p }));
     }
 
+    [HttpGet("todo/{id}")]
+    public async Task<IActionResult> ReadTodo(string id)
+    {
+        return HandleResult(await Mediator.Send(new ReadTodo.Query { Id = id }));
+    }
+
     [HttpPatch("{id}")]
     public async Task<ActionResult> UpdateTodo(string id,[FromBody] UpdateTodoDto dto)
     {
