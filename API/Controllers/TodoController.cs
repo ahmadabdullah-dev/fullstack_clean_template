@@ -32,4 +32,10 @@ public class TodoController : BaseApiController
     {
         return HandleResult(await (Mediator.Send(new CompleteTodo.Command { Id = id, Complete = complete})));
     }
+    [Authorize]
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteTodo(string id)
+    {
+        return HandleResult(await (Mediator.Send(new DeleteTodo.Command { TodoId = id})));
+    }
 }

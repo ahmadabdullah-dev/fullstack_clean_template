@@ -21,7 +21,7 @@ public class UpdateTodo
                 return Result<string>.Failure("Todo was not found", 404);
 
             if (todo.AppUserId != user.Id.ToString()) 
-                return Result<string>.Failure("No ability to update this todo",400);
+                return Result<string>.Failure("No ability to update this todo",403);
 
             if(request.Dto.Title != null && request.Dto.Title != "")
                todo.Title = request.Dto.Title;
@@ -30,7 +30,7 @@ public class UpdateTodo
             
             return result 
                 ? Result<string>.Success(todo.Id)
-                : Result<string>.Failure("Unexpected error happened", 400);
+                : Result<string>.Failure("Unexpected error happened", 500);
         }   
     }
 }

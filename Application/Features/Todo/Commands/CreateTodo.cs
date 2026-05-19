@@ -28,7 +28,7 @@ public class CreateTodo
 
             return success
                 ? Result<string>.Success(todo.Id)
-                : Result<string>.Failure("Failed to add todo", 400);
+                : Result<string>.Failure("Unexpected error happeded", 500);
                 
         }
     }

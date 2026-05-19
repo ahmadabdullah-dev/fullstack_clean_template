@@ -20,7 +20,7 @@ public class CompleteTodo
                 return Result<string>.Failure("Todo was not found", 404);
 
             if (todo.AppUserId != user.Id.ToString())
-                return Result<string>.Failure("No ability to update this todo", 400);
+                return Result<string>.Failure("No ability to update this todo", 403);
 
                 todo.IsCompleted = request.Complete;
 
@@ -28,7 +28,7 @@ public class CompleteTodo
 
             return result
                 ? Result<string>.Success(todo.Id)
-                : Result<string>.Failure("Unexpected error happend", 400);
+                : Result<string>.Failure("Unexpected error happend", 500);
         }
     }
 }
