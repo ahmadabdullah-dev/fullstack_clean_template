@@ -1,7 +1,6 @@
 ﻿using Application.Features.Todo.Commands;
 using Application.Features.Todo.DTOs;
 using Application.Features.Todo.Queries;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;

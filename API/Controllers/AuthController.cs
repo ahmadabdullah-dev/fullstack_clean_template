@@ -6,14 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
-public class AuthController : BaseApiController
+public class AuthController(SignInManager<AppUserEntity> signInManager) : BaseApiController
 {
-    private readonly SignInManager<AppUserEntity> _signInManager;
-
-    public AuthController(SignInManager<AppUserEntity> signInManager, UserManager<AppUserEntity> userManager)
-    {
-        _signInManager = signInManager;
-    }
 
     [AllowAnonymous]
     [HttpPost("register")]
@@ -31,7 +25,7 @@ public class AuthController : BaseApiController
         if (!result.IsSuccess)
             return Unauthorized(result.Error);
 
-        await _signInManager.SignInAsync(result.Value!, isPersistent: dto.RememberMe); // isPersistent: determines if the browser will save login cookies 
+        await signInManager.SignInAsync(result.Value!, isPersistent: dto.RememberMe); // isPersistent: determines if the browser will save login cookies 
 
         return NoContent();
     }
@@ -39,7 +33,7 @@ public class AuthController : BaseApiController
     [HttpPost("logout")]
     public async Task<ActionResult> Logout()
     {
-        await _signInManager.SignOutAsync();
+        await signInManager.SignOutAsync();
         return NoContent();
     }
 }
