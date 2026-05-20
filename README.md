@@ -21,67 +21,30 @@ A full-stack template built with Clean Architecture principles, designed as a re
 - Auth — register and login via ASP.NET Identity+ full crud for user 
 - Todo — full CRUD example to demonstrate the CQRS workflow end to end
 - Result<T> pattern — returns function results as Success(T value) or Failure(string error, int code)
-- PagedList<T> and pagination patterns — handle incoming queries with page number and page size 
+- PagedList<T> and pagination patterns — handle incoming queries with page number and page size
   
-# API EndPoints
-## Auth
+  ---
+  
+## API Endpoints
 
-### Register
-`POST /api/Auth/register`
+### Auth
+- `POST /api/Auth/register` — Register a new user
+- `POST /api/Auth/login` — Login
+- `POST /api/Auth/logout` — Logout
 
-#### Request Body
-```json
-{
-  "userName": "string",
-  "email": "string",
-  "password": "string",
-  "country": "string"
-}
-```
+### Todo
+- `POST /api/Todo` — Create a todo
+- `GET /api/Todo` — List todos *(query: `StartDate`, `Page`, `PageSize`)*
+- `GET /api/Todo/todo/{id}` — Get todo by ID
+- `PATCH /api/Todo/{id}` — Update todo
+- `DELETE /api/Todo/{id}` — Delete todo
+- `PATCH /api/Todo/{id}/complete` — Mark todo as complete
 
----
+### User
+- `GET /api/User/{id}` — Get user by ID
+- `PUT /api/User` — Update user
+- `DELETE /api/User` — Delete user
 
-### Login
-`POST /api/Auth/login`
-
-#### Request Body
-```json
-{
-  "email": "string",
-  "password": "string"
-}
-```
-
----
-
-### Logout
-`POST /api/Auth/logout`
-
----
-
-## Todo
-
-### Create Todo
-`POST /api/Todo`
-
-#### Request Body
-```json
-{
-  "title": "string"
-}
-```
-
----
-
-### Get Todos
-`GET /api/Todo`
-
-#### Query Params
-```txt
-StartDate?: datetime
-Page?: number
-PageSize?: number
-```
 ---
 
 ## Database Migrations
