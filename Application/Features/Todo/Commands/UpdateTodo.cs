@@ -15,13 +15,13 @@ public class UpdateTodo
     {
         public async Task<Result<string>> Handle(Command request, CancellationToken ct)
         {
-            var validationResult = await validator.ValidateAsync(request);
+            var validationResult = await validator.ValidateAsync(request,ct);
 
             if (!validationResult.IsValid)
                 return Result<string>.Failure(string.Join(",", validationResult.Errors.Select(e => e.ErrorMessage)), 400);
           
             var user = await userAccessor.GetUserAsync();
-            var todo = await context.Todos.FindAsync(request.Id);
+            var todo = await context.Todos.FindAsync([request.Id],ct);
 
             if (todo == null)
                 return Result<string>.Failure("Todo was not found", 404);
@@ -29,7 +29,7 @@ public class UpdateTodo
             if (todo.AppUserId != user.Id.ToString()) 
                 return Result<string>.Failure("No ability to update this todo",403);
 
-            if(request.Dto.Title != null && request.Dto.Title != "")
+            if(!string.IsNullOrWhiteSpace(todo.Title))
                todo.Title = request.Dto.Title;
            
             var result = await context.SaveChangesAsync(ct) > 0;

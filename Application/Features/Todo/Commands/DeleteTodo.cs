@@ -12,7 +12,7 @@ public class DeleteTodo
         public async Task<Result<string>> Handle(Command request, CancellationToken ct)
         {
             var user = await userAccessor.GetUserAsync();
-            var todo = await context.Todos.FindAsync(request.TodoId);
+            var todo = await context.Todos.FindAsync([request.TodoId],ct);
 
             if (todo == null)
                 return Result<string>.Failure("Todo was not found", 404);

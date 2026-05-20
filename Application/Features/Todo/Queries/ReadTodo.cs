@@ -17,7 +17,7 @@ public class ReadTodo
         public async Task<Result<ReadTodoDto>> Handle(Query request, CancellationToken ct)
         {
             var currentUserId = userAccessor.GetUserId();
-            var todo = await context.Todos.FindAsync(request.Id);
+            var todo = await context.Todos.FindAsync([request.Id], ct);
 
             if (todo == null)
                 return Result<ReadTodoDto>.Failure("Todo was not found", 404);

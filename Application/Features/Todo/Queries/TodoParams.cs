@@ -2,5 +2,5 @@
 
 public class TodoParams : PaginationParams
 {
-    public DateTimeOffset StartDate { get; set; }
+    public DateTimeOffset StartDate { get; init; }
 }

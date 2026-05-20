@@ -13,14 +13,14 @@ public class CompleteTodo
         public async Task<Result<string>> Handle(Command request, CancellationToken ct)
         {
             var user = await userAccessor.GetUserAsync();
-            var todo = await context.Todos.FindAsync(request.Id);
+            var todo = await context.Todos.FindAsync([request.Id],ct);
 
             if (todo == null)
                 return Result<string>.Failure("Todo was not found", 404);
 
             if (todo.AppUserId != user.Id.ToString())
                 return Result<string>.Failure("No ability to update this todo", 403);
-
+                   
                 todo.IsCompleted = !todo.IsCompleted;
 
             var result = await context.SaveChangesAsync(ct) > 0;

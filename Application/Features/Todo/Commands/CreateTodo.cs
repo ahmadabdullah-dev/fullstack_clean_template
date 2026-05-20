@@ -6,14 +6,14 @@ public class CreateTodo
 {
     public record Command : IRequest<Result<string>>
     {
-        public required CreateTodoDto Dto { get; set; }
+        public required CreateTodoDto Dto { get; init; }
     }
 
     public class Handler(AppDbContext context, IUserAccessor userAccessor, IValidator<Command> validator) : IRequestHandler<Command, Result<string>>
     {
         public async Task<Result<string>> Handle(Command request, CancellationToken ct)
         {
-            var validationResult = await validator.ValidateAsync(request);
+            var validationResult = await validator.ValidateAsync(request,ct);
 
             if (!validationResult.IsValid)
                 return Result<string>.Failure(string.Join(",", validationResult.Errors.Select(e => e.ErrorMessage)), 400);

@@ -8,7 +8,7 @@ public class CreateUser
 {
     public record Command() : IRequest<Result<string>>
     {
-        public required CreateUserDto Dto { get; set; }
+        public required CreateUserDto Dto { get; init; }
     }
 
     public class Handler(UserManager<AppUserEntity> userManager, IValidator<Command> validator)
@@ -16,7 +16,7 @@ public class CreateUser
     {
         public async Task<Result<string>> Handle(Command request, CancellationToken ct)
         {
-            var validationResult = await validator.ValidateAsync(request);
+            var validationResult = await validator.ValidateAsync(request,ct);
 
             if (!validationResult.IsValid)
                 return Result<string>.Failure(string.Join(",", validationResult.Errors.Select(e => e.ErrorMessage)), 400);

@@ -13,8 +13,8 @@ public class ReadUser
     {
         public async Task<Result<ReadUserDto>> Handle(Query request, CancellationToken ct)
         {
-            var user = await context.Users.FindAsync(request.Id);
-          
+            var user = await context.Users.FindAsync([request.Id], ct); // [] seperate key from ct
+
             if (user == null) 
                 return Result<ReadUserDto>.Failure("User not found",404);
 

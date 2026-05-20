@@ -9,7 +9,7 @@ public class LoginUser
 {
     public record Command : IRequest<Result<AppUserEntity>>
     {
-        public required LoginUserDto Dto { get; set; }
+        public required LoginUserDto Dto { get; init; }
     }
 
     public class Handler(UserManager<AppUserEntity> _userManager, IValidator<Command> validator) 
