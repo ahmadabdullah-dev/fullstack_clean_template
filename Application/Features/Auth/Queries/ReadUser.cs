@@ -1,10 +1,9 @@
 ﻿using Application.Features.Auth.DTOs;
 using MediatR;
 
-namespace Application.Features.Auth.Commands;
+namespace Application.Features.Auth.Queries;
 public class ReadUser
 {
-
     public class Query : IRequest<Result<ReadUserDto>>
     {
         public required string Id { get; init; }

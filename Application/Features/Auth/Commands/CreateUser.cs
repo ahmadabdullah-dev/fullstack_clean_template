@@ -29,7 +29,7 @@ public class CreateUser
             };
 
             var result = await userManager.CreateAsync(user, request.Dto.Password);
-
+           
             return result.Succeeded
                 ? Result<string>.Success(user.Id)
                 : Result<string>.Failure(string.Join(",", result.Errors.Select(e => e.Description)), 400 );

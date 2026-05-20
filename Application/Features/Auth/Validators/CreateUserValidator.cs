@@ -10,4 +10,4 @@ public class CreateUserValidator : AbstractValidator<CreateUser.Command>
         RuleFor(x => x.Dto.Password).NotEmpty().Length(8,256).WithName("Password");
         RuleFor(x => x.Dto.Country).NotEmpty().Length(2, 20).WithName("Country");
     }
-}
+}  

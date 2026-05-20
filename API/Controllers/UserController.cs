@@ -1,5 +1,6 @@
 ﻿using Application.Features.Auth.Commands;
 using Application.Features.Auth.DTOs;
+using Application.Features.Auth.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,7 +1,7 @@
 ﻿using Application.Features.Auth.DTOs;
 using FluentValidation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Application.Features.Auth.Commands;
 
@@ -11,7 +11,7 @@ public class UpdateUser
     {
         public required UpdateUserDto Dto { get; init; }
     }
-    public class Handler(AppDbContext context, IUserAccessor userAccessor, IValidator<Command> validator) : IRequestHandler<Command, Result<string>>
+    public class Handler(UserManager<AppUserEntity> userManager, IUserAccessor userAccessor, IValidator<Command> validator) : IRequestHandler<Command, Result<string>>
     {
         public async Task<Result<string>> Handle(Command request, CancellationToken ct)
         {
@@ -21,22 +21,40 @@ public class UpdateUser
                 return Result<string>.Failure(string.Join(",", validationResult.Errors.Select(e => e.ErrorMessage)), 400);
 
             var user = await userAccessor.GetUserAsync();
-        
-                user.UserName = request.Dto.UserName;
 
-                user.Email = request.Dto.Email;
+            if (!string.IsNullOrWhiteSpace(request.Dto.UserName))
+            {
+                var UserNameChangeResult = await userManager.SetUserNameAsync(user, request.Dto.UserName);
+               
+                if (!UserNameChangeResult.Succeeded)
+                    return Result<string>.Failure(string.Join(", ", UserNameChangeResult.Errors.Select(e => e.Description)), 400);
+            }
 
+            if (!string.IsNullOrWhiteSpace(request.Dto.Email))
+            {
+                var EmailChangeResult = await userManager.SetEmailAsync(user, request.Dto.Email);
+               
+                if (!EmailChangeResult.Succeeded)
+                    return Result<string>.Failure(string.Join(", ", EmailChangeResult.Errors.Select(e => e.Description)), 400);
+            }
+
+
+            if (!string.IsNullOrEmpty(request.Dto.Country))
                 user.Country = request.Dto.Country;
-          
-                user.PasswordHash = request.Dto.NewPassword;
-            
-                context.Entry(user).State = EntityState.Modified;
 
-            var result = await context.SaveChangesAsync(ct) > 0;
+            if (!string.IsNullOrWhiteSpace(request.Dto.NewPassword) && !string.IsNullOrWhiteSpace(request.Dto.CurrentPassword))
+            {
+                var ChangePasswordResult = await userManager.ChangePasswordAsync(user, request.Dto.CurrentPassword, request.Dto.NewPassword);
+              
+                if (!ChangePasswordResult.Succeeded)
+                    return Result<string>.Failure(string.Join(", ", ChangePasswordResult.Errors.Select(e => e.Description)), 400);
+            }
 
-            return result
+            var updateResult = await userManager.UpdateAsync(user);
+           
+            return updateResult.Succeeded
                 ? Result<string>.Success(user.Id)
-                : Result<string>.Failure("Unexpected error happened", 500);
+                : Result<string>.Failure(string.Join(", ", updateResult.Errors.Select(e => e.Description)), 500);
         }
     }
 }
