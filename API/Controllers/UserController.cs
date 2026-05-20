@@ -1,6 +1,6 @@
-﻿using Application.Features.Auth.Commands;
-using Application.Features.Auth.DTOs;
-using Application.Features.Auth.Queries;
+﻿using Application.Features.User.Commands;
+using Application.Features.User.DTOs;
+using Application.Features.User.Queries;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

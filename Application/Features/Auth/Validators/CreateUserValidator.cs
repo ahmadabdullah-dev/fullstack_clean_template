@@ -1,4 +1,4 @@
-﻿using Application.Features.Auth.Commands;
+﻿using Application.Features.User.Commands;
 using FluentValidation;
 namespace Application.Features.Auth.Validators;
 public class CreateUserValidator : AbstractValidator<CreateUser.Command>

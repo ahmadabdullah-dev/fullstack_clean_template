@@ -1,4 +1,4 @@
-﻿using Application.Features.Auth.Commands;
+﻿using Application.Features.User.Commands;
 using FluentValidation;
 
 public class UpdateUserValidator : AbstractValidator<UpdateUser.Command>

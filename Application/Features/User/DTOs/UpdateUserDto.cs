@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Auth.DTOs;
+﻿namespace Application.Features.User.DTOs;
 public record UpdateUserDto(
   string? UserName,
   string? Email,

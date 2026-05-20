@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Application.Features.Auth.Commands;
+namespace Application.Features.User.Commands;
 
 public class DeleteUser
 {

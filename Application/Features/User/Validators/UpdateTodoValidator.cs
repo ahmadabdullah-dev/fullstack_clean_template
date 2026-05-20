@@ -1,7 +1,7 @@
 ﻿using Application.Features.Todo.Commands;
 using FluentValidation;
 
-namespace Application.Features.Todo.Validators;
+namespace Application.Features.User.Validators;
 
 public class UpdateTodoValidator : AbstractValidator<UpdateTodo.Command>
 {

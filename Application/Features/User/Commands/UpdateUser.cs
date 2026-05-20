@@ -1,9 +1,9 @@
-﻿using Application.Features.Auth.DTOs;
+﻿using Application.Features.User.DTOs;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace Application.Features.Auth.Commands;
+namespace Application.Features.User.Commands;
 
 public class UpdateUser
 {

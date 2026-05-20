@@ -1,7 +1,7 @@
-﻿using Application.Features.Auth.DTOs;
+﻿using Application.Features.User.DTOs;
 using MediatR;
 
-namespace Application.Features.Auth.Queries;
+namespace Application.Features.User.Queries;
 public class ReadUser
 {
     public class Query : IRequest<Result<ReadUserDto>>
