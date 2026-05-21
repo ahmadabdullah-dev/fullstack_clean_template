@@ -4,5 +4,6 @@ public record ReadUserDto(
     string Id,
     string UserName,
     string Country,
-    string Email
+    string Email,
+    string Role
     );

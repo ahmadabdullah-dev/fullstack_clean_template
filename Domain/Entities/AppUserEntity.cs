@@ -5,5 +5,5 @@ namespace Domain.Entities;
 public class AppUserEntity : IdentityUser
 {
     public string? Country { get; set; }
-    IEnumerable<TodoEntity>? Todos { get; set; }
+    public IEnumerable<TodoEntity>? Todos { get; set; }
 }

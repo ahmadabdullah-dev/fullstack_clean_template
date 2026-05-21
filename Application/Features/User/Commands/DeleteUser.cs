@@ -1,23 +1,25 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 
 namespace Application.Features.User.Commands;
 
 public class DeleteUser
 {
     public record Command : IRequest<Result<string>>; // Empty command required for MediatR contract
-    public class Handler(AppDbContext context, IUserAccessor userAccessor) : IRequestHandler<Command, Result<string>>
+    public class Handler(UserManager<AppUserEntity> userManager, IUserAccessor userAccessor) : IRequestHandler<Command, Result<string>>
     {
         public async Task<Result<string>> Handle(Command request, CancellationToken ct)
         {
             var user = await userAccessor.GetUserAsync();
+           
+            if (user == null)                                                                  
+                return Result<string>.Failure("User not found", 404);
 
-            context.Users.Remove(user);
+            var result = await userManager.DeleteAsync(user);
 
-            var result = await context.SaveChangesAsync(ct) > 0;
-
-            return result
+            return result.Succeeded
             ? Result<string>.Success("User Deleted succesfully")
-            : Result<string>.Failure("Unexpected error happened", 500);
+            : Result<string>.Failure(string.Join(",",result.Errors.Select(e => e.Description)), 500);
         }
     }
 
