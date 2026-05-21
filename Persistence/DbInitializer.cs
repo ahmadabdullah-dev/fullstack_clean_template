@@ -5,8 +5,22 @@ namespace Persistence;
 
 public class DbInitializer
 {
-    public static async Task SeedData(AppDbContext context,UserManager<AppUserEntity> userManager)
+    public static async Task SeedData(AppDbContext context,UserManager<AppUserEntity> userManager, RoleManager<AppRoleEntity> roleManager)
     {
+        var roles = new List<AppRoleEntity>()
+        {
+            new() {Name = "Admin", Description =" Admin role"},
+            new() {Name = "Member", Description = "standard user"}
+        };
+      
+        foreach (var role in roles) { 
+           
+            if(!await roleManager.RoleExistsAsync(role.Name!))
+            {
+                await roleManager.CreateAsync(role);
+            }
+        
+        }
         var users = new List<AppUserEntity>()
         {
             new() {UserName = "cr7", Email= "cristiano@ronaldo.com", Country ="Portugal"},
@@ -20,12 +34,16 @@ public class DbInitializer
             {
                 await userManager.CreateAsync(user, "Pa$$w0rd");
             }
+            await userManager.AddToRoleAsync(users[0], "Admin");
+            await userManager.AddToRoleAsync(users[1], "Member");
+            await userManager.AddToRoleAsync(users[2], "Member");
+
         }
         else
         {
             users = await userManager.Users.ToListAsync();  // use existing users to add id AppUserId for todos
         }
-
+   
         if (context.Todos.Any()) 
             return;
 

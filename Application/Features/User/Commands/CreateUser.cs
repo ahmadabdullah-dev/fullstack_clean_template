@@ -1,7 +1,7 @@
-﻿using Application.Features.Auth.DTOs;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using FluentValidation;
+using Application.Features.User.DTOs;
 namespace Application.Features.User.Commands;
 
 public class CreateUser
@@ -28,7 +28,10 @@ public class CreateUser
                 Country = request.Dto.Country.ToLowerInvariant(),
             };
 
-            var result = await userManager.CreateAsync(user, request.Dto.Password);
+            var result = await userManager.CreateAsync(user, request.Dto.Password);  
+            
+            await userManager.AddToRoleAsync(user, "Member");
+
            
             return result.Succeeded
                 ? Result<string>.Success(user.Id)

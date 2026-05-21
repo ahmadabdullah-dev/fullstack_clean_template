@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace API;
@@ -25,7 +24,7 @@ public static class DependencyInjection
             opt.User.RequireUniqueEmail = true;
            // opt.SignIn.RequireConfirmedEmail = true;
         })
-        .AddRoles<IdentityRole>()
+        .AddRoles<AppRoleEntity>()
         .AddEntityFrameworkStores<AppDbContext>();
 
 
@@ -39,8 +38,9 @@ public static class DependencyInjection
         {
             var context = services.GetRequiredService<AppDbContext>();
             var userManager = services.GetRequiredService<UserManager<AppUserEntity>>();
+            var roleManager = services.GetRequiredService<RoleManager<AppRoleEntity>>();
             await context.Database.MigrateAsync();
-            await DbInitializer.SeedData(context, userManager);
+            await DbInitializer.SeedData(context, userManager,roleManager);
         }
         catch (Exception ex)
         {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Persistence;
 
 public class AppDbContext(DbContextOptions options) 
-    : IdentityDbContext<AppUserEntity> (options)
+    : IdentityDbContext<AppUserEntity, AppRoleEntity, string> (options)
 {
     public DbSet<TodoEntity> Todos { get; set; }
 

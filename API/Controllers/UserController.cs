@@ -1,7 +1,6 @@
 ﻿using Application.Features.User.Commands;
 using Application.Features.User.DTOs;
 using Application.Features.User.Queries;
-using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
