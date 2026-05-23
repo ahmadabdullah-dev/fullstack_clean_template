@@ -64,4 +64,11 @@ dotnet ef database update `
   --startup-project Api/Api.csproj
 ```
 
+**Remove Migration:**
+```bash
+dotnet ef migrations remove `
+  --project Persistence/Persistence.csproj `
+  --startup-project Api/Api.csproj
+```
+  
 > Make sure your connection string in `API/appsettings.json` is configured before running the update.
