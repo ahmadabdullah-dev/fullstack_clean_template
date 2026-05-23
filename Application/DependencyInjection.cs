@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Application.Features.Auth.Validators;
 using FluentValidation;
 using Application.Features.Todo.Validators;
+using Application.Features.User.Validators;
 namespace Application;
 
 public static class DependencyInjection
