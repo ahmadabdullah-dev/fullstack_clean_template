@@ -15,7 +15,11 @@ public class UserController(SignInManager<AppUserEntity> signInManager) : BaseAp
     {
         return HandleResult(await Mediator.Send(new ReadUser.Query { Id = id}));
     }
-    
+    [HttpGet]
+    public async Task<IActionResult> ReadCurrentUser()
+    {
+        return HandleResult(await Mediator.Send(new ReadCurrentUser.Query { }));
+    }
     [HttpPut]
     public async Task<IActionResult> UpdateUser(UpdateUserDto dto)
     {

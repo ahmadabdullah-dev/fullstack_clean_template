@@ -2,8 +2,8 @@
 
 public record ReadUserDto(
     string Id,
-    string UserName,
-    string Country,
+    string UserName,  
     string Email,
+    string Country,  
     string Role
     );

@@ -20,7 +20,7 @@ public class ReadUser
            
             var role = await  userManager.GetRolesAsync(user);
             
-            var dto = new ReadUserDto(user.Id, user.UserName!, user.Country!, user.Email!, role[0]);
+            var dto = new ReadUserDto(user.Id, user.UserName!,user.Email!, user.Country!,  role[0]);
 
             return Result<ReadUserDto>.Success(dto);
         }
