@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
-import LoginForm from "../pages/LoginForm";
-import Register from "../pages/Register";
-import NotFound from "../components/NotFound";
-import Settings from "../pages/Settings";
-import Profile from "../components/Profile";
-import ProtectedRoute from "../components/ProtectedRoute";
+import Home from "../../features/Home/pages/Home";
+import LoginForm from "../../features/auth/pages/LoginForm";
+import Register from "../../features/auth/pages/Register";
+import NotFound from "../../util/NotFound";
+import Settings from "../../features/user/Settings";
+import Profile from "../../features/user/Profile";
+import ProtectedRoute from "../../features/auth/components/ProtectedRoute";
 function AppRoutes() {
   return (
     <>

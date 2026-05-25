@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import { client } from "../api/client";
+import { client } from "../../../api/client";
 import type { LoginCredentials } from "../types/auth";
 
 export const useLogin = () => {
