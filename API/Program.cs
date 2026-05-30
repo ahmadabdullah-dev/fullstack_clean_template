@@ -26,11 +26,12 @@ if (app.Environment.IsDevelopment())
 }
 
 await app.MigrateAndSeedAsync();
-
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRateLimiter(); 
 app.MapControllers();
+
 
 app.Run();

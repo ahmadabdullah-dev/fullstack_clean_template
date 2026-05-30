@@ -5,12 +5,14 @@ using Application.Features.User.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 namespace API.Controllers;
 
 public class AuthController(SignInManager<AppUserEntity> signInManager) : BaseApiController
 {
 
     [AllowAnonymous]
+    [EnableRateLimiting("AuthLimiter")]
     [HttpPost("register")]
     public async Task<ActionResult> Register([FromBody] CreateUserDto dto)
     {
@@ -18,6 +20,7 @@ public class AuthController(SignInManager<AppUserEntity> signInManager) : BaseAp
     }
 
     [AllowAnonymous]
+    [EnableRateLimiting("AuthLimiter")]
     [HttpPost("login")]
     public async Task<ActionResult> Login([FromBody] LoginUserDto dto)
     {
